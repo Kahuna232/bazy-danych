@@ -17,3 +17,5 @@ mysql> alter table walizka
     -> alter kolor set default 'rozowy';
 mysql> insert into walizka values (0,10,'rozowy',1);
 mysql> insert into walizka values (0,99,'teczowy',3);
+
+DAWID DOMIENIK GRUPA 1 IO
