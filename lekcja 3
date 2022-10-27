@@ -1,0 +1,19 @@
+mysql> create table postac(id_postaci int not null auto_increment primary key, nazwa varchar(40) not null, rodzaj ENUM ('wiking','ptak','kobieta'),wiek int not null);
+mysql> alter table postac modify wiek int unsigned;
+mysql> alter table postac add column data_ur date;
+mysql> insert into postac values (1, 'Bjorn','wiking',42,'1980-01-1');
+mysql> insert into postac values (2, 'drozd', 'ptak',1,'2021-01-01');
+mysql> insert into postac values (3, 'tesciowa', 'kobieta',60,'1962-01-01');
+mysql> update postac set wiek = 88 where nazwa like 'tesciowa';
+zad2_
+mysql> create table walizka(id_walizki int auto_increment primary key,
+    -> pojemnosc int unsigned,
+    -> kolor enum('rozowy','czerwony','teczowy','zolty'),
+    -> id_wlasciciela int,
+    -> foreign key(id_wlasciciela)
+    -> references postac(id_postaci)
+    -> on delete cascade);
+mysql> alter table walizka
+    -> alter kolor set default 'rozowy';
+mysql> insert into walizka values (0,10,'rozowy',1);
+mysql> insert into walizka values (0,99,'teczowy',3);
