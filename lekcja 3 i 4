@@ -1,3 +1,6 @@
+DAWID DOMIENIK GR.1 IO
+
+zadanie 1
 mysql> create table postac(id_postaci int not null auto_increment primary key, nazwa varchar(40) not null, rodzaj ENUM ('wiking','ptak','kobieta'),wiek int not null);
 mysql> alter table postac modify wiek int unsigned;
 mysql> alter table postac add column data_ur date;
@@ -5,7 +8,8 @@ mysql> insert into postac values (1, 'Bjorn','wiking',42,'1980-01-1');
 mysql> insert into postac values (2, 'drozd', 'ptak',1,'2021-01-01');
 mysql> insert into postac values (3, 'tesciowa', 'kobieta',60,'1962-01-01');
 mysql> update postac set wiek = 88 where nazwa like 'tesciowa';
-zad2_
+
+zadanie 2
 mysql> create table walizka(id_walizki int auto_increment primary key,
     -> pojemnosc int unsigned,
     -> kolor enum('rozowy','czerwony','teczowy','zolty'),
@@ -18,4 +22,18 @@ mysql> alter table walizka
 mysql> insert into walizka values (0,10,'rozowy',1);
 mysql> insert into walizka values (0,99,'teczowy',3);
 
-DAWID DOMIENIK GRUPA 1 IO
+zadanie 3
+mysql> CREATE table izba (
+    -> adres_budynku varchar(40),
+    -> nazwa_izby varchar (40),
+    -> metraz int unsigned,
+    -> wlasciciel int,
+    -> foreign key (wlasciciel) references postac(id_postaci)
+    -> on delete set null,
+    -> constraint pk_izby primary key (adres_budynku, nazwa_izby)
+    -> );
+
+mysql> alter table izba add column kolor varchar(30) after metraz;
+mysql> insert into izba values('hafafa 12', 'loza_dzentelmenow', 10, 'habibi', 1);
+
+zadanie 4
