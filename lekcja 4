@@ -8,4 +8,20 @@ SELECT rodzaj,SUM(waga)AS 'suma wag' FROM zasob GROUP BY rodzaj;
 SELECT nazwa,AVG(waga)as 'srednia waga' FROM zasob  WHERE ilosc>=4  GROUP BY nazwa HAVING SUM(waga)>10;
 SELECT nazwa,COUNT(distinct nazwa) FROM zasob GROUP BY nazwa HAVING MIN(ilosc)>1;
 
-#Zadanie 3
+#Zadanie 3 
+ SELECT kreatura.nazwa, sum(ekwipunek.ilosc) as ilosc
+    -> from kreatura
+    -> inner join ekwipunek on kreatura.idkreatury = ekwipunek.idkreatury group by kreatura.nazwa;
+
+ SELECT kreatura.nazwa, group_concat(distinct zasob.nazwa) as zasoby from kreatura 
+    -> join ekwipunek on kreatura.idkreatury = ekwipunek.idkreatury 
+    -> join zasob on zasob.idzasobu = ekwipunek.idzasobu 
+    -> group by kreatura.nazwa;
+
+SELECT kreatura.nazwa, ekwipunek.idkreatury from kreatura
+    -> left join ekwipunek on kreatura.idkreatury = ekwipunek.idkreatury
+    -> where ekwipunek.idkreatury IS NULL;
+    
+ #Zadanie 4
+ 
+ 
