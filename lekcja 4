@@ -1,0 +1,9 @@
+#Zadanie 1
+ SELECT AVG(waga)AS srednia_waga FROM kreatura WHERE rodzaj='wiking';
+SELECT rodzaj,AVG(waga)AS srednia_waga,COUNT(idKreatury)AS ilosc FROM kreatura GROUP BY rodzaj;
+SELECT rodzaj,AVG(2022-YEAR(dataUr))AS sredni_wiek FROM kreatura GROUP BY rodzaj;//nie idealne rozwiązanie, nie jest zalezne od miesiaca i dnia urodzin wiec margines błędu +/- 1
+
+#Zadanie 2
+SELECT rodzaj,SUM(waga)AS 'suma wag' FROM zasob GROUP BY rodzaj;
+ SELECT nazwa,AVG(waga)as 'srednia waga' FROM zasob  WHERE ilosc>=4  GROUP BY nazwa HAVING SUM(waga)>10;
+ SELECT nazwa,COUNT(distinct nazwa) FROM zasob GROUP BY nazwa HAVING MIN(ilosc)>1;
