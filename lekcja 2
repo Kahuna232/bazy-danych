@@ -1,0 +1,43 @@
+#Zadanie 1
+DELETE FROM postac WHERE rodzaj='wiking' AND nazwa NOT LIKE 'Bjorn' ORDER BY wiek DESC LIMIT 2;
+
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_2;
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+
+ ALTER TABLE postac DROP PRIMARY KEY,MODIFY id_postaci  INT;
+
+#Zadanie 2
+
+ALTER TABLE postac ADD COLUMN pesel CHAR(11)NOT NULL UNIQUE;
+ UPDATE postac SET pesel=12345678901 WHERE id_postaci=1;
+ UPDATE postac SET pesel=12345128901 WHERE id_postaci=2;
+ UPDATE postac SET pesel=64345128901 WHERE id_postaci=3;
+ UPDATE postac SET pesel=68495128901 WHERE id_postaci=5;
+ UPDATE postac SET pesel=68478128901 WHERE id_postaci=7;
+ UPDATE postac SET pesel=68478121101 WHERE id_postaci=8;
+ ALTER TABLE postac ADD PRIMARY KEY (pesel);
+ALTER TABLE postac MODIFY rodzaj ENUM('wiking','kobieta','ptak','syrena');
+INSERT INTO postac VALUES(9,'Gertruda Nieszczera','syrena','1100-01-01',922,NULL,NULL,23435432412);
+
+#Zadanie 3
+UPDATE postac SET nazwa_statku='statek2' WHERE nazwa LIKE '%a%';
+UPDATE statek SET max_ladownosc=max_ladownosc*0.7
+    -> WHERE data_wodowania>='1900-01-01'
+    -> AND data_wodowania<='1999-12-31';
+ALTER TABLE postac ADD CONSTRAINT sprawdz_wiek CHECK(wiek<1000);
+#Zadanie 4
+ALTER TABLE postac MODIFY rodzaj ENUM('wiking','kobieta','ptak','syrena','waz');
+INSERT INTO postac VALUES(10,'Loko','waz','2013-07-07',9,NULL,NULL,89024389034);
+  CREATE TABLE marynarz LIKE postac;
+   ALTER TABLE marynarz RENAME COLUMN id_postaci TO id_marynarza;
+   INSERT INTO marynarz SELECT * FROM postac WHERE nazwa_statku IS NOT NULL;
+ALTER TABLE marynarz ADD FOREIGN KEY(pesel)REFERENCES postac(pesel)ON DELETE CASCADE;
+#Zadanie 5
+ UPDATE marynarz SET nazwa_statku=NULL;
+ DELETE FROM postac WHERE nazwa='Haki';
+ DELETE FROM statek;
+ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_1;
+DROP TABLE statek;
+ CREATE TABLE zwierz(id_zwierza INT AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(20),wiek INT);
+ INSERT INTO zwierz(nazwa,wiek) SELECT nazwa,wiek FROM postac WHERE rodzaj='ptak' OR rodzaj='waz';
